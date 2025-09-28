@@ -63,6 +63,13 @@ namespace Parking.Api.Controllers
         {
             var c = await _db.Clientes.FindAsync(id);
             if (c == null) return NotFound();
+
+            var jaExiste = await _db.Clientes.AnyAsync(x=> x.Nome.ToLower() == dto.Nome.ToLower() && x.Telefone == dto.Telefone && x.Id != id);
+            if (jaExiste)
+            {
+                return BadRequest(new { field = "nomeTelefone", message = "Já existe outro cliente com esse nome e telefone." });
+            }
+
             c.Nome = dto.Nome;
             c.Telefone = dto.Telefone;
             c.Endereco = dto.Endereco;
@@ -83,5 +90,6 @@ namespace Parking.Api.Controllers
             await _db.SaveChangesAsync();
             return NoContent();
         }
+
     }
 }
