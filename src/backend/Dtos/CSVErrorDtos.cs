@@ -1,6 +1,6 @@
 namespace Parking.Api.Dtos;
 
-public record CSVErrorDto(int processados, int inseridos, List<CSVErrorExplain> error);
+public record CSVResponseDto(int processados, int inseridos, List<CSVErrorExplain> error);
 public record CSVErrorExplain(
     int linha,
     string tipoErro,

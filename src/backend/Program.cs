@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Parking.Api.Data;
 using Parking.Api.Services;
+using Parking.Api.Services.CSVService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddScoped<PlacaService>();
 builder.Services.AddScoped<FaturamentoService>();
+builder.Services.AddScoped<CSVService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
